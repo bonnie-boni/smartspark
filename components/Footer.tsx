@@ -36,10 +36,12 @@ export default function Footer() {
                 <Mail className="mr-2 md:mr-3 text-slate-100 shrink-0" size={14} />
                 <span className="text-xs md:text-sm break-all">info@smartsparkservices.com</span>
               </div>
+              {/*
               <div className="flex items-center text-slate-300">
                 <Phone className="mr-2 md:mr-3 text-slate-100 shrink-0" size={14} />
                 <span className="text-xs md:text-sm">+1 (602) 851-1680</span>
               </div>
+              */}
               <div className="flex items-start text-slate-300">
                 <MapPin className="mr-2 md:mr-3 text-slate-100 mt-1 shrink-0" size={14} />
                 <div className="text-xs md:text-sm">

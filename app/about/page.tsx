@@ -24,9 +24,10 @@ const values = [
 
 const team = [
   { name: 'Frieze Wandabwa', role: 'Founder & CEO' },
+  { name: 'Teddy Githiji', role: 'Software Engineer' },
   { name: 'Cyrilla Chikamai', role: 'Co-Founder' },
-  { name: 'Teddy Githiji', role: 'Head of Technology' },
-  { name: 'Anthony Murimi', role: 'Creative Designer' },
+  { name: 'Teddy Githiji', role: 'Software Engineer' },
+  { name: 'Mboni George', role: 'Software Engineer' },
 ]
 
 export default function AboutPage() {
