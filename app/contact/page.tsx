@@ -1,14 +1,14 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { CheckCircle, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
 const heroImages = ['/images/contact/1.jpg', '/images/contact/2.jpg', '/images/contact/3.jpg', '/images/contact/4.jpg']
 
-export default function ContactPage() {
+function ContactFormContent() {
   const searchParams = useSearchParams()
   const [submitted, setSubmitted] = useState(false)
   const [slide, setSlide] = useState(0)
@@ -126,5 +126,13 @@ export default function ContactPage() {
       </main>
       <Footer />
     </div>
+  )
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-100 text-slate-900 dark:bg-primary-950 dark:text-slate-100" /> }>
+      <ContactFormContent />
+    </Suspense>
   )
 }

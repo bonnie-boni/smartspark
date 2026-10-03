@@ -38,13 +38,14 @@ const serviceMap = {
   },
 } as const
 
-export default function ServiceDetailPage({ params }: { params: { service: keyof typeof serviceMap } }) {
-  const service = serviceMap[params.service]
-  const heroImage = params.service === 'web-development-and-design'
+export default async function ServiceDetailPage({ params }: { params: Promise<{ service: keyof typeof serviceMap }> }) {
+  const { service: routeService } = await params
+  const service = serviceMap[routeService]
+  const heroImage = routeService === 'web-development-and-design'
     ? '/images/services/web-development.jpg'
-    : params.service === 'ai-and-automation-solutions'
+    : routeService === 'ai-and-automation-solutions'
       ? '/images/services/ai-automation.jpg'
-      : params.service === 'graphic-design-and-branding'
+      : routeService === 'graphic-design-and-branding'
         ? '/images/services/graphic-design.jpg'
         : '/images/services/digital-marketing.jpg'
 
@@ -107,7 +108,7 @@ export default function ServiceDetailPage({ params }: { params: { service: keyof
                   <p className="mt-2 inline-flex items-center gap-2 text-2xl font-bold"><Clock size={20} /> {service.delivery}</p>
                 </div>
               </div>
-              <Link href={`/contact?service=${params.service}`} className="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-accent-500 px-5 py-3 font-semibold text-white transition-colors hover:bg-accent-600">
+              <Link href={`/contact?service=${routeService}`} className="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-accent-500 px-5 py-3 font-semibold text-white transition-colors hover:bg-accent-600">
                 Get a quote <ArrowRight className="ml-2" size={18} />
               </Link>
             </aside>
