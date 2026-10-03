@@ -9,10 +9,10 @@ import Footer from '../../components/Footer'
 const heroImages = ['/images/about/1.jpg', '/images/about/2.jpg', '/images/about/3.jpg', '/images/about/4.jpg']
 
 const stats = [
-  { number: '500+', label: 'Projects Completed', icon: Award },
-  { number: '150+', label: 'Happy Clients', icon: Users },
-  { number: '25+', label: 'Countries Served', icon: Globe },
-  { number: '98%', label: 'Client Satisfaction', icon: Heart },
+  { number: '10', label: 'Projects Completed', icon: Award },
+  { number: '12', label: 'Happy Clients', icon: Users },
+  { number: '3', label: 'Countries Served', icon: Globe },
+  { number: '99.99%', label: 'Client Satisfaction', icon: Heart },
 ]
 
 const values = [
@@ -24,7 +24,6 @@ const values = [
 
 const team = [
   { name: 'Frieze Wandabwa', role: 'Founder & CEO' },
-  { name: 'Teddy Githiji', role: 'Software Engineer' },
   { name: 'Cyrilla Chikamai', role: 'Co-Founder' },
   { name: 'Teddy Githiji', role: 'Software Engineer' },
   { name: 'Mboni George', role: 'Software Engineer' },
