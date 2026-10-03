@@ -9,7 +9,7 @@ const serviceMap = {
     subtitle: 'Custom websites that perform and convert',
     description: 'Build a stronger online presence with lean, responsive, and maintainable web experiences.',
     features: ['Personal websites', 'Company websites', 'E-commerce integration', 'CMS development', 'Performance optimization'],
-    pricing: 'Garanteed Flexible payment',
+    pricing: 'Garanteed Flexible Payment',
     delivery: 'Quick delivery based on project scope',
   },
   'ai-and-automation-solutions': {
@@ -17,7 +17,7 @@ const serviceMap = {
     subtitle: 'Automation that removes repetitive work',
     description: 'Use AI to streamline support, content, and internal workflows without creating complexity.',
     features: ['ChatGPT integration', 'Email automation', 'Chatbot creation', 'Workflow automation', 'Data analysis'],
-    pricing: 'Garanteed Flexible payment',
+    pricing: 'Garanteed Flexible Payment',
     delivery: 'Quick delivery based on project scope',
   },
   'graphic-design-and-branding': {
@@ -25,7 +25,7 @@ const serviceMap = {
     subtitle: 'Visual identity that stays consistent everywhere',
     description: 'Create logos, identity systems, and marketing assets that hold together across channels.',
     features: ['Logo design', 'Brand identity', 'Marketing materials', 'Social graphics'],
-    pricing: 'Garanteed Flexible payment',
+    pricing: 'Garanteed Flexible Payment',
     delivery: 'Quick delivery based on project scope',
   },
   'digital-marketing': {
@@ -33,7 +33,7 @@ const serviceMap = {
     subtitle: 'Campaign support with a clearer focus',
     description: 'Plan and ship content, SEO, and campaign work without losing track of outcomes.',
     features: ['SEO', 'Social media management', 'Content marketing', 'Ad campaign management'],
-    pricing: 'Garanteed Flexible payment',
+    pricing: 'Garanteed Flexible Payment',
     delivery: 'Quick delivery based on project scope',
   },
 } as const

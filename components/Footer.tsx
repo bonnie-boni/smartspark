@@ -76,7 +76,7 @@ export default function Footer() {
 
         <div className="border-t border-primary-800 pt-6 md:pt-8 text-center">
           <p className="text-xs md:text-sm text-slate-400">
-            &copy; 2026 SmartSpark Services. All rights reserved.
+            &copy; {new Date().getFullYear()} SmartSpark Services. All rights reserved.
           </p>
         </div>
       </div>
