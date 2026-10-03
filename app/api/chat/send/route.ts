@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { addContact } from '../../../../../lib/mock-store'
+import { addContact } from '../../../../lib/mock-store'
 
 // POST /api/chat/send
 // Body: { draft: string, name?: string, email?: string, service?: string }
