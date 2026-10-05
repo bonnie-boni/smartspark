@@ -8,13 +8,6 @@ import Footer from '../../components/Footer'
 
 const heroImages = ['/images/about/1.jpg', '/images/about/2.jpg', '/images/about/3.jpg', '/images/about/4.jpg']
 
-const stats = [
-  { number: '10', label: 'Projects Completed', icon: Award },
-  { number: '12', label: 'Happy Clients', icon: Users },
-  { number: '3', label: 'Countries Served', icon: Globe },
-  { number: '99.99%', label: 'Client Satisfaction', icon: Heart },
-]
-
 const values = [
   { icon: Target, title: 'Excellence', description: 'A clear standard for quality across every page, system, and delivery.' },
   { icon: Heart, title: 'Integrity', description: 'Transparent communication, practical scope, and honest execution.' },
@@ -25,7 +18,7 @@ const values = [
 const team = [
   { name: 'Frieze Wandabwa', role: 'Founder & CEO' },
   { name: 'Cyrilla Chikamai', role: 'Co-Founder' },
-  { name: 'Teddy Githiji', role: 'Software Engineer' },
+  { name: 'Teddy Githinji', role: 'Software Engineer' },
   { name: 'Mboni George', role: 'Software Engineer' },
 ]
 
@@ -65,19 +58,7 @@ export default function AboutPage() {
             </motion.p>
           </div>
         </section>
-
-        <section className="bg-gray-100 py-20 dark:bg-primary-900">
-          <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
-            {stats.map((stat, index) => (
-              <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: index * 0.08 }} viewport={{ once: true }} className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-lg dark:border-primary-800 dark:bg-primary-900">
-                <stat.icon className="mx-auto text-accent-500" size={32} />
-                <div className="mt-4 text-4xl font-bold text-gray-600 dark:text-gray-300">{stat.number}</div>
-                <div className="mt-2 text-sm font-medium text-gray-600 dark:text-gray-300">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
+        
         <section className="px-4 py-20 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center">
             <div>
