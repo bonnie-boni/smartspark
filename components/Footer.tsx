@@ -13,26 +13,26 @@ export default function Footer() {
       <div className="absolute inset-0 md:hidden" style={{ backgroundImage: 'url(/images/footer-bg.webp)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.1 }}></div>
       <div className="absolute inset-0 bg-primary-950/95"></div>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* Company Info */}
-          <div className="md:col-span-2">
-            <div className="flex items-center mb-4">
-              <img src="/images/logo/logo.webp" alt="SmartSpark Services" className="w-16 h-16 md:w-24 md:h-24 object-contain mr-3 md:mr-6 shrink-0" />
+          <div className="md:col-span-2 lg:col-span-2 min-w-0">
+            <div className="flex flex-col md:flex-row items-center mb-4">
+              <img src="/images/logo/logo.webp" alt="SmartSpark Services" className="w-16 h-16 md:w-24 md:h-24 object-contain mr-3 md:mr-6 mb-3 md:mb-0 shrink-0" />
               <div>
                 <h3 className="text-lg md:text-xl font-bold text-slate-100">SmartSpark Services</h3>
                 <p className="text-xs md:text-sm text-slate-300">Where AI and Creativity Ignite</p>
               </div>
             </div>
-            <p className="text-sm md:text-base text-slate-300 mb-4">
+            <p className="text-sm md:text-base text-slate-300 mb-4 break-words">
               Empowering businesses worldwide with global talent and cutting-edge AI innovation from our US headquarters.
             </p>
           </div>
 
           {/* Contact Info */}
-          <div>
+          <div className="min-w-0">
             <h4 className="text-base md:text-lg font-bold text-slate-100 mb-3 md:mb-4">Contact Info</h4>
             <div className="space-y-2 md:space-y-3">
-              <div className="flex items-center text-slate-300">
+              <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-slate-300">
                 <Mail className="mr-2 md:mr-3 text-slate-100 shrink-0" size={14} />
                 <span className="text-xs md:text-sm break-all">info@smartsparkservices.com</span>
               </div>
@@ -42,9 +42,9 @@ export default function Footer() {
                 <span className="text-xs md:text-sm">+1 (602) 851-1680</span>
               </div>
               */}
-              <div className="flex items-start text-slate-300">
+              <div className="flex flex-col md:flex-row items-start gap-1 md:gap-2 text-slate-300">
                 <MapPin className="mr-2 md:mr-3 text-slate-100 mt-1 shrink-0" size={14} />
-                <div className="text-xs md:text-sm">
+                <div className="text-xs md:text-sm break-words">
                   <div>Litchfield Park, AZ 85340</div>
                 </div>
               </div>
@@ -52,23 +52,23 @@ export default function Footer() {
           </div>
 
           {/* Social Links */}
-          <div>
+          <div className="min-w-0">
             <h4 className="text-base md:text-lg font-bold text-slate-100 mb-3 md:mb-4">Follow Us</h4>
-            <div className="flex space-x-3 md:space-x-4">
+            <div className="flex flex-wrap space-x-3 md:space-x-4 justify-center md:justify-start">
               <a href="https://www.facebook.com/share/1H5CdxwEwe/" target="_blank" rel="noopener noreferrer" className="p-2">
-                <img src="/social/facebook.png" alt="Facebook" className="w-7 h-7" />
+                <img src="/social/facebook.png" alt="Facebook" className="w-7 h-7 min-w-7" />
               </a>
               <a href="https://www.instagram.com/smartspark_services/" target="_blank" rel="noopener noreferrer" className="p-2">
-                <img src="/social/instagram.png" alt="Instagram" className="w-7 h-7" />
+                <img src="/social/instagram.png" alt="Instagram" className="w-7 h-auto min-w-7" />
               </a>
               <a href="https://www.linkedin.com/groups/15404006/" target="_blank" rel="noopener noreferrer" className="p-2">
-                <img src="/social/linkedin.png" alt="LinkedIn" className="w-7 h-7" />
+                <img src="/social/linkedin.png" alt="LinkedIn" className="w-7 h-auto min-w-7" />
               </a>
               <a href="https://x.com/Smartspark2025" target="_blank" rel="noopener noreferrer" className="p-2">
-                <img src="/social/x.png" alt="X" className="w-7 h-7 bg-white rounded-full border-none" />
+                <img src="/social/x.png" alt="X" className="w-7 h-auto min-w-7 bg-white rounded-full border-none" />
               </a>
               <a href="https://wa.me/16028863530" target="_blank" rel="noopener noreferrer" className="pt-1">
-                <img src="/social/whatsapp.png" alt="YouTube" className="w-9 h-9" />
+                <img src="/social/whatsapp.png" alt="WhatsApp" className="w-9 h-auto min-w-9" />
               </a>
             </div>
           </div>

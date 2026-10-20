@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Award, Globe, Heart, Target, Users, Zap } from 'lucide-react'
+import {  Globe, Heart, Target, Zap } from 'lucide-react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
