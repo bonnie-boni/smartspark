@@ -1,138 +1,168 @@
 'use client'
 
+import { useActionState, useEffect, Suspense, useState } from 'react'
+import { useFormStatus } from 'react-dom'
 import { useSearchParams } from 'next/navigation'
-import { Suspense, useEffect, useState } from 'react'
-import { CheckCircle, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
+import { Send } from 'lucide-react'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import { Dropdown } from '@/components/ui/dropdown'
+import { submitContactForm } from '@/app/actions/contact'
+import { ToastProvider, useToast } from '@/components/ui/toaster'
 
-const heroImages = ['/images/contact/1.jpg', '/images/contact/2.jpg', '/images/contact/3.jpg', '/images/contact/4.jpg']
+interface ContactFormState {
+  success: boolean | null
+  message: string
+}
+
+const initialContactState: ContactFormState = { success: null, message: '' }
+
+const SERVICE_OPTIONS = [
+  { value: 'Web Development & Design', label: 'Web Development & Design' },
+  { value: 'AI & Automation Solutions', label: 'AI & Automation Solutions' },
+  { value: 'Graphic Design & Branding', label: 'Graphic Design & Branding' },
+  { value: 'Digital Marketing', label: 'Digital Marketing' },
+  { value: 'Other', label: 'Other' }
+]
+
+function ContactSubmitButton() {
+  const { pending } = useFormStatus()
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#6d28d9] px-5 py-3 font-semibold text-white shadow-lg shadow-[#6d28d9]/30 transition-all hover:bg-[#7c3aed] hover:shadow-[#6d28d9]/50 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#6d28d9] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none"
+    >
+      {pending ? 'Sending...' : 'Send Message'}
+      <Send size={18}  />
+    </button>
+  )
+}
 
 function ContactFormContent() {
   const searchParams = useSearchParams()
-  const [submitted, setSubmitted] = useState(false)
-  const [slide, setSlide] = useState(0)
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: '',
-  })
+  const [serviceNeeded, setServiceNeeded] = useState<string>(searchParams.get('service') ?? '')
+  const [formState, formAction] = useActionState(submitContactForm, initialContactState)
+  const { addToast } = useToast()
 
   useEffect(() => {
-    const service = searchParams.get('service')
-    if (service) {
-      setFormData((current) => ({ ...current, service }))
+    if (formState.success === null) {
+      return
     }
-  }, [searchParams])
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setSlide((current) => (current + 1) % heroImages.length)
-    }, 6000)
-
-    return () => window.clearInterval(timer)
-  }, [])
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
+    addToast({
+      intent: formState.success ? 'success' : 'error',
+      title: formState.message,
+      duration: 4000
     })
-
-    if (response.ok) {
-      setSubmitted(true)
-      setFormData({ name: '', email: '', phone: '', service: '', message: '' })
-    }
-  }
+  }, [formState, addToast])
 
   return (
-    <div className="min-h-screen bg-gray-100 text-slate-900 dark:bg-primary-950 dark:text-slate-100">
-      <Header />
-      <main>
-        <section className="relative isolate overflow-hidden pt-20">
-          <div className="absolute inset-0">
-            {heroImages.map((image, index) => (
-              <div
-                key={image}
-                className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${slide === index ? 'opacity-100' : 'opacity-0'}`}
-                style={{ backgroundImage: `url(${image})` }}
-              />
-            ))}
-            <div className="absolute inset-0 bg-primary-950/80" />
-          </div>
-
-          <div className="relative mx-auto flex min-h-[56vh] max-w-5xl flex-col justify-center px-4 py-24 text-center text-white sm:px-6 lg:px-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white/80">Contact</p>
-            <h1 className="mt-3 text-4xl font-bold md:text-6xl">Start the project in one clear step.</h1>
-            <p className="mx-auto mt-6 max-w-3xl text-lg text-white/90 md:text-2xl">A single contact route with service prefill and a simpler form flow.</p>
-          </div>
-        </section>
-
-        <section className="px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="space-y-6 rounded-3xl bg-primary-950 p-8 text-white shadow-2xl">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-accent-300">Reach us</p>
-                <h2 className="mt-3 text-3xl font-bold">Contact details</h2>
-              </div>
-              <div className="space-y-4 text-white/85">
-                <div className="flex items-center gap-3"><Mail size={18} /> info@smartsparkservices.com</div>
-                <div className="flex items-center gap-3"><Phone size={18} /> +1 (602) 851-1680</div>
-                <div className="flex items-center gap-3"><MapPin size={18} /> Litchfield Park, AZ 85340</div>
-              </div>
-
-              <div className="pt-4">
-                <a
-                  href="https://wa.me/16028511680?text=Hi%20SmartSpark%2C%20I%20want%20to%20discuss%20a%20project."
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1fb85d]"
-                >
-                  <MessageCircle size={18} />
-                  Chat on WhatsApp
-                </a>
-              </div>
-            </div>
-
-            <div className="rounded-3xl bg-primary-900 p-8 text-white">
-              {submitted ? (
-                <div className="py-12 text-center">
-                  <CheckCircle className="mx-auto text-green-500" size={48} />
-                  <h2 className="mt-4 text-3xl font-bold">Thank you</h2>
-                  <p className="mt-3 text-gray-600 dark:text-gray-300">Your message was submitted successfully.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <input value={formData.name} onChange={(event) => setFormData((current) => ({ ...current, name: event.target.value }))} placeholder="Full name" className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none focus:border-accent-500 dark:border-primary-700 dark:bg-primary-900" />
-                    <input value={formData.email} onChange={(event) => setFormData((current) => ({ ...current, email: event.target.value }))} placeholder="Email address" className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none focus:border-accent-500 dark:border-primary-700 dark:bg-primary-900" />
-                  </div>
-                  <input value={formData.phone} onChange={(event) => setFormData((current) => ({ ...current, phone: event.target.value }))} placeholder="Phone number" className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none focus:border-accent-500 dark:border-primary-700 dark:bg-primary-900" />
-                  <input value={formData.service} onChange={(event) => setFormData((current) => ({ ...current, service: event.target.value }))} placeholder="Service needed" className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none focus:border-accent-500 dark:border-primary-700 dark:bg-primary-900" />
-                  <textarea value={formData.message} onChange={(event) => setFormData((current) => ({ ...current, message: event.target.value }))} rows={6} placeholder="Tell us about your project" className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none focus:border-accent-500 dark:border-primary-700 dark:bg-primary-900" />
-                  <button type="submit" className="inline-flex w-full items-center justify-center rounded-xl bg-accent-600 px-5 py-3 font-semibold text-white transition-colors hover:bg-accent-500 hover:cursor-pointer hover:text-accent-600">
-                    Send message <Send className="ml-2" size={18} />
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+    <form action={formAction} className="space-y-6">
+      <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
+        <div>
+          <label htmlFor="fullName" className="block mb-2 text-sm font-semibold text-white">
+            Full Name
+          </label>
+          <input
+            id="fullName"
+            name="fullName"
+            type="text"
+            autoComplete="name"
+            placeholder="Full name"
+            required
+            className="w-full rounded-xl border border-[#2a2a3d] bg-[#12121a] px-4 py-3 text-white placeholder-[#6b7280] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#6d28d9] transition-colors"
+          />
+        </div>
+        <div>
+          <label htmlFor="emailAddress" className="block mb-2 text-sm font-semibold text-white">
+            Email Address
+          </label>
+          <input
+            id="emailAddress"
+            name="emailAddress"
+            type="email"
+            autoComplete="email"
+            placeholder="Email address"
+            required
+            className="w-full rounded-xl border border-[#2a2a3d] bg-[#12121a] px-4 py-3 text-white placeholder-[#6b7280] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#6d28d9] transition-colors"
+          />
+        </div>
+      </div>
+      <div>
+        <label htmlFor="phoneNumber" className="block mb-2 text-sm font-semibold text-white">
+          Phone Number
+        </label>
+        <input
+          id="phoneNumber"
+          name="phoneNumber"
+          type="tel"
+          autoComplete="tel"
+          placeholder="Phone number"
+          className="w-full rounded-xl border border-[#2a2a3d] bg-[#12121a] px-4 py-3 text-white placeholder-[#6b7280] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#6d28d9] transition-colors"
+        />
+      </div>
+      <div>
+        <Dropdown
+          id="serviceNeeded"
+          name="serviceNeeded"
+          label="Service Needed"
+          options={SERVICE_OPTIONS}
+          value={serviceNeeded}
+          onChange={setServiceNeeded}
+        />
+      </div>
+      <div>
+        <label htmlFor="projectDetails" className="block mb-2 text-sm font-semibold text-white">
+          Project Details
+        </label>
+        <textarea
+          id="projectDetails"
+          name="projectDetails"
+          rows={6}
+          placeholder="Tell us about your project, goals, timeline, and budget..."
+          required
+          className="w-full rounded-xl border border-[#2a2a3d] bg-[#12121a] px-4 py-3 text-white placeholder-[#6b7280] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#6d28d9] transition-colors"
+        />
+      </div>
+      <ContactSubmitButton />
+    </form>
   )
 }
 
 export default function ContactPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-gray-100 text-slate-900 dark:bg-primary-950 dark:text-slate-100" /> }>
-      <ContactFormContent />
+    <Suspense fallback={<div className="min-h-screen bg-[#09090e] text-white" />}>
+      <ToastProvider>
+        <Header />
+        <main>
+          <section className="pt-20 pb-12 sm:pt-28 sm:pb-16">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="text-center">
+                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#6d28d9]">
+                  Contact
+                </p>
+                <h1 className="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+                  Start the project in one clear step.
+                </h1>
+                <p className="mx-auto mt-6 max-w-2xl text-lg text-[#94a3b8] md:text-xl">
+                  A single contact route with service prefill and a simpler form flow.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="py-20 sm:py-24 lg:py-32">
+            <div className="mx-auto max-w-[850px] px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto rounded-[2rem] border border-[#2a2a3d] bg-[#12121a] p-6 sm:p-8 shadow-2xl">
+                <ContactFormContent />
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </ToastProvider>
     </Suspense>
   )
 }
