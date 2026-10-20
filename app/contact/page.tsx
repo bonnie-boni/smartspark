@@ -153,7 +153,7 @@ export default function ContactPage() {
             </div>
           </section>
 
-          <section className="py-20 sm:py-24 lg:py-32">
+          <section>
             <div className="mx-auto max-w-[850px] px-4 sm:px-6 lg:px-8">
               <div className="mx-auto rounded-[2rem] border border-[#2a2a3d] bg-[#12121a] p-6 sm:p-8 shadow-2xl">
                 <ContactFormContent />
