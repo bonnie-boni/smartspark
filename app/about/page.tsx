@@ -98,13 +98,14 @@ export default function AboutPage() {
           </div>
         </section>
 
+{/* 
         <section className="px-4 py-20 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="text-center">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-accent-500">Team</p>
               <h2 className="mt-3 text-3xl font-bold md:text-5xl">The people behind the work.</h2>
             </div>
-            <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
               {team.map((member) => (
                 <div key={member.name} className="rounded-2xl border border-slate-200 bg-white p-8 shadow-lg dark:border-primary-800 dark:bg-primary-900">
                   <h3 className="text-xl font-bold">{member.name}</h3>
@@ -112,8 +113,11 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
+            
           </div>
         </section>
+
+        */}
       </main>
       <Footer />
     </div>
